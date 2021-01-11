@@ -104,7 +104,9 @@ until [ $i -eq $ja ]; do
         clear
         echo "Hvilken Nextcloud versjon ønsker du å installere?"
         echo "Nextstall anbefaler følgende støttede versjoner:"
+        echo ""
         grep -v UNSUPPORTED NCversions.txt
+        echo ""
         echo "Skriv KUN inn versjonnummer"
         echo ""
         read -p "Jeg ønsker versjon: " ncVersjon
