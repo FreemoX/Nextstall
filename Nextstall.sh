@@ -38,6 +38,7 @@ ncDownloadURLpre="https://download.nextcloud.com/server/releases/nextcloud-"
 
 clear
 echo "Nextstall versjon $version"
+echo " Laget av Franz Rolfsvaag "
 echo ""
 if [ $versionM -lt 1 ] && [ $versionL -lt 1 ]; then
         echo "             - - - - - - - - - -              "
@@ -113,13 +114,13 @@ until [ $i -eq $ja ]; do
         echo ""
         read -n 1 i
         echo "Husk at du kan avbryte ved å trykke 'CTRL + C'"
+        echo ""
 done
 i=-1
 mkdir $nctemp && sleep 1
 echo "Opprettet mappen '$nctemp'"
 echo "Laster nå ned Nextcloud versjon $ncVersjon fra $ncDownloadURL"
 cd $nctemp && wget $ncDownloadURL
-#cd $nctemp && mkdir ncTestNedlasting
 echo ""
 echo "Nextcloud versjon $ncVersjon er nå lastet ned"
 sleep 2
@@ -180,6 +181,51 @@ echo ""
 cd .. && mkdir oldZips && mv $nctemp/*.zip oldZips/
 rm -r $nctemp && wait
 echo "Fjernet mappen '$nctemp'"
+sleep 2
+
+clear
+echo "Installerer nå apache2 og apache2-utils"
+echo ""
+sudo apt install -y apache2 apache2-utils && wait
+sudo systemctl start apache2 && sudo systemctl enable apache2
+echo ""
+echo "Nextstall har nå installert følgende versjon av Apache 2"
+apache2 -v
+echo ""
+echo "Installerer nå PHP7.4"
+sudo apt install php7.4 libapache2-mod-php7.4 php7.4-mysql php-common php7.4-cli php7.4-common php7.4-json php7.4-opcache php7.4-readline
+sudo a2enmod php7.4 && sudo systemctl restart apache2
+echo ""
+echo "Nextstall har nå installert følgende versjon av PHP:"
+php --version
+sleep 3
+echo "Åpner nå port 80 for HTTP trafikk"
+sudo ufw allow http && wait
+echo ""
+echo ""
+echo "Du kan nå dra til denne serverens IP adresse for å se om webserveren er oppe"
+echo "Ikke lukk dette vinduet enda"
+read -p "Trykk hvilken som helst tast for å fortsette" -n 1 i
+echo ""
+echo ""
+i=-1
+echo "Gir Apache2 rettigheter til $ncInstallDir"
+sudo chown www-data:www-data $ncInstallDir -R
+sleep 2
+
+clear
+echo "Installerer nå MariaDB"
+echo ""
+sudo apt install mariadb-server mariadb-client
+sudo systemctl start mariadb && sudo systemctl enable mariadb
+echo ""
+echo "- - - - - - - - - -"
+echo "Bekreft at Apache2 og MariaDB kjører"
+echo "Om ikke, avbryt skriptet med 'CTRL + C'"
+systemctl status apache2 | grep active
+systemctl status mariadb | grep active
+echo "- - - - - - - - - -"
+sleep 5
 
 clear
 echo "Dette skriptet er nå ferdig"
@@ -201,4 +247,5 @@ echo ""
 echo ""
 echo ""
 read -p "Trykk hvilken som helst tast for å lukke dette skriptet" -n 1 i
+clear
 exit 1
