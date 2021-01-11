@@ -33,7 +33,7 @@ You are free to make changes to this script and to use it in your own projects, 
 The default directory is home/Nextstall
 > cd && cd Nextstall
  2. **Run Nextstall as sudo**
-*NOTE: Nextstall need sudo permissions in order to perform changes in system folders such as /var/www. Remember that you can review the script code yourself if you feel uneasy about giving Nextstall sudo permissions. The script file can be found here -> https://github.com/FreemoX/Nextstall/blob/main/Nextstall.sh*
+*NOTE: Nextstall need sudo permissions in order to perform changes in system folders such as /var/www and in the database. Remember that you can review the script code yourself if you feel uneasy about giving Nextstall sudo permissions. The script file can be found here -> https://github.com/FreemoX/Nextstall/blob/main/Nextstall.sh*
 > sudo ./Nextstall.sh
  3. **Follow on-screen instructions**
 
