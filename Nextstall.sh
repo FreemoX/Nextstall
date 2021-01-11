@@ -117,6 +117,7 @@ until [ $i -eq $ja ]; do
         echo "Husk at du kan avbryte ved å trykke 'CTRL + C'"
         echo ""
 done
+echo ""
 i=-1
 mkdir $nctemp && sleep 1
 echo "Opprettet mappen '$nctemp'"
@@ -231,8 +232,6 @@ sleep 5
 clear
 echo "Dette skriptet er nå ferdig"
 echo ""
-echo "Nå må du gjøre litt på egen hånd"
-echo "Du kan nå fullføre installasjonen ved å dra til denne serveren sin IP adresse med en nettleser"
 echo "Ikke lukk dette skriptet før du har fått med deg informasjonen du behøver for siste del av installasjonen"
 echo ""
 echo ""
@@ -240,6 +239,9 @@ echo "Her har du en liten gjennomgang av hva som er gjort ..."
 echo "Du har kjørt dette skriptet fra $(pwd)"
 echo "Du har installert Nextcloud $ncVersjon i $ncInstallDir"
 echo "En kopi av den originale $ncInstallDir er laget, og den heter '$ncInstallDir.backup'"
+echo ""
+echo "Du kan nå denne serveren gjennom følgende IP-adresse(r):"
+ip addr show | grep inet | grep -v inet6
 # - - - - - - - - - -
 # Avvent tastetrykk før skriptet lukkes
 # - - - - - - - - - -
