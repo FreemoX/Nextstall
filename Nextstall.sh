@@ -15,9 +15,9 @@
 # This script is currently written with Norwegian dialogue. This will be changed in the future
 # - - - - - - - - - -
 
-versionL=0
-versionM=0
-versionS=1
+versionL=0  # Major release  | Major changes to Nextstall compared to the previous major release
+versionM=0  # Normal release | Feature implementations and new features
+versionS=1  # Minor release  | Bug fixes, typo corrections, and similar minor improvements
 version=${versionL}.${versionM}.${versionS}
 
 # - - - - - - - - - -
@@ -41,7 +41,7 @@ clear
 echo "Nextstall versjon $version"
 echo " Laget av Franz Rolfsvaag "
 echo ""
-if [ $versionM -lt 1 ] && [ $versionL -lt 1 ]; then
+if [ $versionL -eq 0 ] && [ $versionM -lt 1 ]; then
         echo "             - - - - - - - - - -              "
         echo ""
         echo "                   WARNING                    "
@@ -103,7 +103,8 @@ i=-1
 until [ $i -eq $ja ]; do
         clear
         echo "Hvilken Nextcloud versjon ønsker du å installere?"
-        echo "Eksempelvis: 20.0.4"
+        echo "Nextstall anbefaler følgende støttede versjoner:"
+        grep -v UNSUPPORTED NCversions.txt
         echo "Skriv KUN inn versjonnummer"
         echo ""
         read -p "Jeg ønsker versjon: " ncVersjon
@@ -126,6 +127,8 @@ cd $nctemp && wget $ncDownloadURL
 echo ""
 echo "Nextcloud versjon $ncVersjon er nå lastet ned"
 sleep 2
+read -p "Trykk hvilken som helst tast for å dra til neste steg" -n 1 i
+i=-1
 
 clear
 echo "Installerer nå 'unzip' dersom den mangler"
@@ -147,12 +150,14 @@ until [ $i -eq $ja ]; do
         echo "[$nei] = Nei"
         read -n 1 i
 done
+read -p "Trykk hvilken som helst tast for å dra til neste steg" -n 1 i
 i=-1
 
 clear
 echo "Er du helt sikker på at du ønsker å plassere Nextcloud i $ncInstallDir?"
-echo "Om ikke, trykk 'CTRL + C' innen 15 sekunder for å avbryte installasjonen" && sleep 15
-echo ""
+echo "Husk at det vanligste er å plassere Nextcloud i '/var/www'"
+read -p "Trykk hvilken som helst tast for å dra til neste steg" -n 1 i
+i=-1
 echo ""
 echo "Plasserer nå Nextcloud i $ncInstallDir"
 echo "Lager en kopi av $ncInstallDir dersom den eksisterer allerede"
@@ -165,17 +170,14 @@ unzip nextcloud-$ncVersjon.zip && wait
 echo ""
 echo "!!! VIKTIG !!!"
 echo "Dette er siste sjanse å angre dersom du har valgt feil mappe"
-echo "Dersom du angrer, trykk 'CTRL + C' innen 15 sekunder" && sleep 5
-echo "10 sekunder igjen" && sleep 5
-echo "5 sekunder igjen" && sleep 1
-echo "4 sekunder igjen" && sleep 1
-echo "3 sekunder igjen" && sleep 1
-echo "2 sekunder igjen" && sleep 1
-echo "1 sekund igjen" && sleep 1
+read -p "Trykk hvilken som helst tast for å dra til neste steg" -n 1 i
+i=-1
 echo ""
 echo ""
 echo "Plasserer nå Nextcloud i $ncInstallDir"
 mv nextcloud/* $ncInstallDir && wait
+read -p "Trykk hvilken som helst tast for å dra til neste steg" -n 1 i
+i=-1
 
 clear
 echo "Fjerner nå gamle filer og mapper fra installasjonen" && sleep 1
@@ -184,6 +186,8 @@ cd .. && mkdir oldZips && mv $nctemp/*.zip oldZips/
 rm -r $nctemp && wait
 echo "Fjernet mappen '$nctemp'"
 sleep 2
+read -p "Trykk hvilken som helst tast for å dra til neste steg" -n 1 i
+i=-1
 
 clear
 echo "Installerer nå apache2 og apache2-utils"
@@ -207,13 +211,13 @@ echo ""
 echo ""
 echo "Du kan nå dra til denne serverens IP adresse for å se om webserveren er oppe"
 echo "Ikke lukk dette vinduet enda"
-read -p "Trykk hvilken som helst tast for å fortsette" -n 1 i
 echo ""
 echo ""
-i=-1
 echo "Gir Apache2 rettigheter til $ncInstallDir"
 sudo chown www-data:www-data $ncInstallDir -R
 sleep 2
+read -p "Trykk hvilken som helst tast for å dra til neste steg" -n 1 i
+i=-1
 
 clear
 echo "Installerer nå MariaDB"
@@ -228,6 +232,8 @@ systemctl status apache2 | grep active
 systemctl status mariadb | grep active
 echo "- - - - - - - - - -"
 sleep 5
+read -p "Trykk hvilken som helst tast for å dra til neste steg" -n 1 i
+i=-1
 
 clear
 echo "Dette skriptet er nå ferdig"
@@ -250,5 +256,6 @@ echo ""
 echo ""
 echo ""
 read -p "Trykk hvilken som helst tast for å lukke dette skriptet" -n 1 i
+i=-1
 clear
 exit 1
