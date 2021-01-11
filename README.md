@@ -12,8 +12,15 @@
 Nextstall is written by Franz Rolfsvaag, and released under the GNU GPL V3 license. 
 You are free to make changes to this script and to use it in your own projects, both for commercial and non-commercial use. 
 
+# Important information
+Nextstall is provided free of charge, but its usage is at your own risk. We're working on making sure Nextstall is a safe to run as possible, but things can go awry.
+Nextstall is currently only intended to be used on fresh OS installs. Its usage on established systems is not recommended, and may have adverse effects even if used correctly.
+There are **no** safety features currently implemented in Nextstall. Make sure you know what you are doing if you do not follow the default or recommended settings.
+Nextstall is only tested on a select few Linux distros. We can not ensure its functionality outside these distros, but as long as you do the appropriate changes depending on your OS, it should still work as long as you can run *bash* scripts. The currently tested Linux distros are:
+Ubuntu 20.04
+
 # Installation instructions
-***NOTE:** These instructions are tested in Ubuntu 20.4. Make sure to do corresponding changes depending on your Linux distro!*
+***NOTE:** These instructions are tested in Ubuntu 20.04. Make sure to do corresponding changes depending on your Linux distro!*
  1. **Update your OS install**
 > sudo apt update && sudo apt upgrade -y
  2. **Install Git**
@@ -32,10 +39,12 @@ You are free to make changes to this script and to use it in your own projects, 
  1. **Navigate to the Nextstall directory if you have not already done so**
 The default directory is home/Nextstall
 > cd && cd Nextstall
- 2. **Run Nextstall as sudo**
+ 2. **Make the Nextstall script executable**
+> sudo chmod +x Nextstall.sh
+ 3. **Run Nextstall as sudo**
 *NOTE: Nextstall need sudo permissions in order to perform changes in system folders such as /var/www and in the database. Remember that you can review the script code yourself if you feel uneasy about giving Nextstall sudo permissions. The script file can be found here -> https://github.com/FreemoX/Nextstall/blob/main/Nextstall.sh*
 > sudo ./Nextstall.sh
- 3. **Follow on-screen instructions**
+ 4. **Follow on-screen instructions**
  
 # Roadmap
  1. Ensure Nextstall can complete a full Nextcloud install
