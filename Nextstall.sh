@@ -7,6 +7,7 @@
 # Version: 0.0.1
 # Date:    11 jan 2021
 # License: GNU GPL V3
+# GitHub:  https://github.com/FreemoX/Nextstall.git
 # 
 # Please feel free to improve on this script and use it for your own projects, but leave credit where credit is due.
 #
@@ -38,7 +39,7 @@ ncDownloadURLpre="https://download.nextcloud.com/server/releases/nextcloud-"
 clear
 echo "Nextstall versjon $version"
 echo ""
-if [[ $versionM -lt 1 ] && [ $versionL -lt 1 ]]; then
+if [ $versionM -lt 1 ] && [ $versionL -lt 1 ]; then
         echo "             - - - - - - - - - -              "
         echo ""
         echo "                   WARNING                    "
