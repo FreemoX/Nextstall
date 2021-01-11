@@ -7,6 +7,7 @@
 # Version: 0.0.1
 # Date:    11 jan 2021
 # License: GNU GPL V3
+#          https://github.com/FreemoX/Nextstall/blob/main/LICENSE
 # GitHub:  https://github.com/FreemoX/Nextstall.git
 # 
 # Please feel free to improve on this script and use it for your own projects, but leave credit where credit is due.
