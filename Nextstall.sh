@@ -27,9 +27,9 @@ version=${versionL}.${versionM}.${versionS}
 # - - - - - - - - - -
 
 initDir=$pwd
-valg=-1
-nei=0
-ja=1
+choice=-1
+no=0
+yes=1
 nctemp="nextcloud-temp"
 ncDownloadURLpre="https://download.nextcloud.com/server/releases/nextcloud-"
 
@@ -43,15 +43,15 @@ echo " Laget av Franz Rolfsvaag "
 echo ""
 if [ $versionL -eq 0 ] && [ $versionM -lt 1 ]; then
         echo "             - - - - - - - - - -              "
-        echo ""
+        echo "                                              "
         echo "                   WARNING                    "
-        echo ""
+        echo "                                              "
         echo "   !!! This script is NOT ready for use !!!   "
         echo "  Please do not use this until version 0.1.0  "
         echo "This script will NOT work at its current state"
-        echo ""
+        echo "                                              "
         echo "             - - - - - - - - - -              "
-        sleep 10
+	read -p "Trykk hvilken som helst tast for å dra til neste steg" -n 1 i
 fi
 echo "Installasjonsskript for Nextcloud"
 echo "Husk å kjør dette skriptet som root"
@@ -68,22 +68,22 @@ echo ""
 echo "Du får nå noen valg ..."
 echo ""
 echo "Gyldige valg er ..."
-echo "["$ja"] = Ja"
+echo "[$yes] = Ja"
 echo "    Du vil bli veiledet gjennom installasjonen"
 echo ""
-echo "[$nei] = Nei"
+echo "[$no] = Nei"
 echo "    Installasjonen vil da avbrytes"
 echo ""
 echo "Ønsker du å installere Nextcloud?"
-read -n 1 valg
-if [ $valg -eq $ja ]; then
+read -n 1 choice
+if [ $choice -eq $yes ]; then
         echo ""
         echo "Installasjonen vil nå fortsette"
         echo "Trykk 'CTRL + C' for å avbryte installasjonen"
         echo "Dette anbefales da ikke"
-        sleep 2
+        echo ""
         echo " - - - - - "
-elif [ $valg -eq $nei ]; then
+elif [ $choice -eq $no ]; then
         echo ""
         echo "Installasjonen vil nå avsluttes"
         exit 1
@@ -100,7 +100,7 @@ sleep 1
 echo ""
 echo ""
 i=-1
-until [ $i -eq $ja ]; do
+until [ $i -eq $yes ]; do
         clear
         echo "Hvilken Nextcloud versjon ønsker du å installere?"
         echo "Nextstall anbefaler følgende støttede versjoner:"
@@ -109,12 +109,12 @@ until [ $i -eq $ja ]; do
         echo ""
         echo "Skriv KUN inn versjonnummer"
         echo ""
-        read -p "Jeg ønsker versjon: " ncVersjon
-        echo "Du ønsker å installere Nextcloud versjon $ncVersjon, stemmer dette?"
-        ncDownloadURL=$ncDownloadURLpre$ncVersjon.zip
+        read -p "Jeg ønsker versjon: " ncVersion
+        echo "Du ønsker å installere Nextcloud versjon $ncVersion, stemmer dette?"
+        ncDownloadURL=$ncDownloadURLpre$ncVersion.zip
         echo ""
-        echo "[$ja] = Ja"
-        echo "[$nei] = Nei"
+        echo "[$yes] = Ja"
+        echo "[$no] = Nei"
         echo ""
         read -n 1 i
         echo "Husk at du kan avbryte ved å trykke 'CTRL + C'"
@@ -124,10 +124,10 @@ echo ""
 i=-1
 mkdir $nctemp && sleep 1
 echo "Opprettet mappen '$nctemp'"
-echo "Laster nå ned Nextcloud versjon $ncVersjon fra $ncDownloadURL"
+echo "Laster nå ned Nextcloud versjon $ncVersion fra $ncDownloadURL"
 cd $nctemp && wget $ncDownloadURL
 echo ""
-echo "Nextcloud versjon $ncVersjon er nå lastet ned"
+echo "Nextcloud versjon $ncVersion er nå lastet ned"
 sleep 2
 read -p "Trykk hvilken som helst tast for å dra til neste steg" -n 1 i
 i=-1
@@ -136,7 +136,7 @@ clear
 echo "Installerer nå 'unzip' dersom den mangler"
 apt install unzip && wait
 sleep 2
-until [ $i -eq $ja ]; do
+until [ $i -eq $yes ]; do
         clear
         echo "Hvor ønsker du at Nextcloud skal være plassert?"
         echo "Standard er '/var/www'"
@@ -148,8 +148,8 @@ until [ $i -eq $ja ]; do
         echo "Er du sikker på at du ønsker å plassere Nextcloud i $ncInstallDir?"
         echo "Det blir tatt en kopi av $ncInstallDir dersom den eksisterer allerede"
         echo "Kopien blir kalt $ncInstallDir.backup"
-        echo "[$ja] = Ja"
-        echo "[$nei] = Nei"
+        echo "[$yes] = Ja"
+        echo "[$no] = Nei"
         read -n 1 i
 done
 read -p "Trykk hvilken som helst tast for å dra til neste steg" -n 1 i
@@ -168,7 +168,7 @@ mkdir $ncInstallDir && wait
 echo ""
 echo "Pakker ut Nextcloud i en midlertidig mappe"
 mkdir nextcloud
-unzip nextcloud-$ncVersjon.zip && wait
+unzip nextcloud-$ncVersion.zip && wait
 echo ""
 echo "!!! VIKTIG !!!"
 echo "Dette er siste sjanse å angre dersom du har valgt feil mappe"
@@ -245,7 +245,7 @@ echo ""
 echo ""
 echo "Her har du en liten gjennomgang av hva som er gjort ..."
 echo "Du har kjørt dette skriptet fra $(pwd)"
-echo "Du har installert Nextcloud $ncVersjon i $ncInstallDir"
+echo "Du har installert Nextcloud $ncVersion i $ncInstallDir"
 echo "En kopi av den originale $ncInstallDir er laget, og den heter '$ncInstallDir.backup'"
 echo ""
 echo "Du kan nå denne serveren gjennom følgende IP-adresse(r):"
