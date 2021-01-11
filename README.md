@@ -1,5 +1,5 @@
 # Nextstall
-*Version: 0.0.1*
+*Version: 0.0.2*
 | *Date:	11 jan 2021* | 
 **NOT FOR USE UNTIL V 0.1.0**
 *Production-ready at version 1.0.0*
