@@ -5,7 +5,7 @@
 *Production-ready at version 1.0.0*
 
 *Dialogue languages: Norwegian*
-*more coming soon*
+ | *more coming soon*
 
 *Nextstall is a Linux script meant to simplify the installation of Nextcloud on your servers. The script walks you through the entire installation procedure, allowing you to install a working Nextcloud instance on a fresh Linux distro in a matter of minutes.*
 
