@@ -36,4 +36,9 @@ The default directory is home/Nextstall
 *NOTE: Nextstall need sudo permissions in order to perform changes in system folders such as /var/www and in the database. Remember that you can review the script code yourself if you feel uneasy about giving Nextstall sudo permissions. The script file can be found here -> https://github.com/FreemoX/Nextstall/blob/main/Nextstall.sh*
 > sudo ./Nextstall.sh
  3. **Follow on-screen instructions**
-
+ 
+# Roadmap
+ 1. Ensure Nextstall can complete a full Nextcloud install
+ 2. Make Nextstall user-friendly enough for anyone to use it
+ 3. Implement multi-language capabilities in Nextstall
+ 4. Optimalize the code
