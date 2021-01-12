@@ -38,7 +38,7 @@ Ubuntu 20.04
 
  1. **Navigate to the Nextstall directory if you have not already done so**
 The default directory is home/Nextstall
-> cd && cd Nextstall
+> cd ~/Nextstall
  2. **Make the Nextstall script executable**
 > sudo chmod +x Nextstall.sh
  3. **Run Nextstall as sudo**
