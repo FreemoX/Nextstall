@@ -5,7 +5,7 @@
 #
 # Author:  Franz Rolfsvaag
 # Version: 0.0.3
-# Date:    11 jan 2021
+# Date:    14 jan 2021
 # License: GNU GPL V3
 #          https://github.com/FreemoX/Nextstall/blob/main/LICENSE
 # GitHub:  https://github.com/FreemoX/Nextstall.git
