@@ -4,7 +4,7 @@
 # A Linux script meant to make Nextcloud installs easier
 #
 # Author:  Franz Rolfsvaag
-# Version: 0.0.2
+# Version: 0.0.3
 # Date:    11 jan 2021
 # License: GNU GPL V3
 #          https://github.com/FreemoX/Nextstall/blob/main/LICENSE
@@ -21,7 +21,7 @@
 
 versionL=0  # Major release  | Major changes to Nextstall compared to the previous major release
 versionM=0  # Normal release | Feature implementations and new features
-versionS=2  # Minor release  | Bug fixes, typo corrections, and similar minor improvements
+versionS=3  # Minor release  | Bug fixes, typo corrections, and similar minor improvements
 version=${versionL}.${versionM}.${versionS}
 
 installDeps=(	# Lists the dependancies Nextstall needs to function
